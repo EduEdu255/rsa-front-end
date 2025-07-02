@@ -26,10 +26,10 @@ export function Header({ isLoggedIn = false }) {
             ) : (
                 <>
 
-                    <span className="text-xl font-bold">H2lato</span>
+                    <img src="/images/Logo.webp" alt="" />
                     <div className="flex gap-2">
-                        <Link href="/entrar" className="bg-purple-600 px-4 py-2 rounded-lg text-sm">Entrar</Link>
-                        <Link href="/registrar" className="bg-purple-700 px-4 py-2 rounded-lg text-sm">Registrar</Link>
+                        <Link href="/login" className="button-bg-dark-secondary px-4 py-2 border-2 rounded-lg text-sm">Entrar</Link>
+                        <Link href="/register" className="button-bg-dark px-4 py-2 rounded-lg text-sm">Registrar</Link>
                     </div>
                 </>
             )}

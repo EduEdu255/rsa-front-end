@@ -12,7 +12,7 @@ export function HeroSlider() {
   ];
 
   return (
-    <div className="w-full h-48 md:h-64 overflow-hidden rounded-lg">
+    <div className="w-full h-65 md:h-64 overflow-hidden rounded-lg">
       <Swiper
         modules={[Pagination, Autoplay]}
         spaceBetween={0}

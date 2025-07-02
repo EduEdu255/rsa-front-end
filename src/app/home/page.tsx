@@ -1,9 +1,9 @@
-import { Header } from '../components/common/Header'; 
-import { HeroSlider } from '../components/home/HeroSlider';
-import { GameCard } from '../components/home/GameCard';
-import { ResultCard } from '../components/home/ResultCard';
-import { WinnerCard } from '../components/home/WinnerCard';
-import { BottomNavBar } from '../components/common/BottomNavBar';
+import { Header } from '../../components/common/Header'; 
+import { HeroSlider } from '../../components/home/HeroSlider';
+import { GameCard } from '../../components/home/GameCard';
+import { ResultCard } from '../../components/home/ResultCard';
+import { WinnerCard } from '../../components/home/WinnerCard';
+import { BottomNavBar } from '../../components/common/BottomNavBar';
 
 export default function HomePage() {
   
@@ -23,7 +23,7 @@ export default function HomePage() {
   return (
     <div className="bg-gray-100 min-h-screen">
       
-      <Header isLoggedIn={false} /> 
+      <Header isLoggedIn={true} /> 
 
       <div className="p-9 space-y-6">
  
@@ -56,8 +56,6 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-
-        
       </div>
       <BottomNavBar/>
     </div>

@@ -1,9 +1,22 @@
-@import "tailwindcss";
+/* global.css */
+@import "tailwindcss"; /* Mantenha o import do Tailwind para as outras classes */
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-primary: #5B21B6;
+  --color-primary: #6D0B92; /* Sua cor primária */
+  --card-background: #f0f0f0; /* Exemplo para o card */
+  --color-secondary: #ededed; /* Exemplo de cor secundária */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --color-primary: #6D0B92; /* Primary no dark mode */
+    --card-background: #212121; /* Card no dark mode */
+    --color-secondary: #ededed; /* Secondary no dark mode */
+  }
 }
 
 @theme inline {
@@ -13,16 +26,34 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #5B21B6;
-  }
-}
-
 body {
-  background: var(--background);
+  background: var(--background); /* O body já está usando sua variável --background */
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Nova classe CSS para o background do seu container principal */
+.primary-bg-container {
+    background-color: var(--color-primary); /* Aqui usamos a variável --color-primary */
+}
+
+.border-input{
+  border-color: var(--color-primary);
+  color: var(--color-primary)
+}
+
+.button-bg-withe{
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.button-bg-dark{
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+.button-bg-dark-secondary{
+  background-color: none;
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
 }

@@ -15,7 +15,7 @@ export default function RootLayout({
         <main className="pb-20"> 
           {children}
         </main>
-        <BottomNavBar /> 
+        
       </body>
     </html>
   );
