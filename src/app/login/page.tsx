@@ -14,7 +14,7 @@ export default function EntrarPage() {
             src="/images/h2bicho-logo.png" 
             alt="H2bicho Logo"
             fill 
-            style={{ objectFit: 'contain' }} 
+            style={{objectFit:'contain'}} 
             priority 
           />
         </div>
