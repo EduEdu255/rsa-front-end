@@ -4,7 +4,7 @@ import { GameCard } from '../components/home/GameCard';
 import { ResultCard } from '../components/home/ResultCard';
 import { WinnerCard } from '../components/home/WinnerCard';
 import { BottomNavBar } from '../components/common/BottomNavBar';
-
+import Link from 'next/link';
 export default function HomePage() {
   
   const results = [
@@ -32,19 +32,27 @@ export default function HomePage() {
       
         <section className="text-center mt-6">
           <h2 className="text-[35px] font-bold text-purple-900 mb-4">Jogar</h2>
-          <div className="flex justify-center">
+          <Link href="/login" passHref className="w-full">         
+            <div className="flex justify-center">
             <GameCard imageUrl="/images/JogoDoBichoimg.webp" /> 
-          </div>
+            </div>
+          
+          </Link>
+          
         </section>
 
    
         <section className="text-center mt-6">
           <h2 className="text-[35px] font-bold text-purple-900 mb-4">Resultados</h2>
-          <div className="space-y-3">
+          <Link href="/login" passHref className="w-full">
+              <div className="space-y-3">
             {results.map((result) => (
               <ResultCard key={result.id} type={result.type} date={result.date} />
             ))}
           </div>
+          
+          </Link>
+          
         </section>
 
   

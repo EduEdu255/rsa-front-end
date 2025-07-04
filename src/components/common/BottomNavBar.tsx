@@ -20,7 +20,7 @@ export function BottomNavBar() {
 
   return (
     
-    <nav className="fixed bottom-0 left-0 right-0 bg-purple-800 text-white p-2 flex justify-around items-center rounded-top-[25] z-50 h-20">
+    <nav className="fixed bottom-0 left-0 right-0 primary-bg-container text-secondary p-2 flex justify-around items-center rounded-top-[25] z-50 h-20">
         
       {navItems.map((item) => (
         <Link key={item.name} href={item.href} className={`flex flex-col items-center text-xs ${pathname === item.href ? 'text-yellow-300' : ''}`}>

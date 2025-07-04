@@ -5,18 +5,18 @@ import PerfilIcon from '../../../public/PerfilIcon.svg'
 
 export function Header({ isLoggedIn = false }) {
     return (
-        <header className="bg-purple-800 text-white p-4 flex justify-between items-center h-16">
+        <header className="primary-bg-container  text-secondary p-9 px-5 flex justify-between items-center h-16">
             {isLoggedIn ? (
                 <>
                     <img src="/images/Logo.webp" alt="" />
 
                     <div className='flex '>
-                        <Link href="/depositar" className="bg-white font-bold m-3 p-1 rounded-full text-sm  text-purple-800 flex items-center gap-1">
+                        <Link href="/depositar" className="bg-white font-bold m-3 p-1 rounded-full text-sm  text-primary flex items-center gap-1">
                             Depositar {'➔'}
                         </Link>
 
                         <div className="flex items-center gap-2 bg-white p-2 rounded-[15px]">
-                            <span className="font-bold text-purple-800 text-lg">R$ 0,00</span>
+                            <span className="font-bold text-primary text-lg">R$ 0,00</span>
                             <Link href="/perfil" className="text-2xl"><img src= "/PerfilIcon.svg" alt="" /></Link>
                         </div>
 
