@@ -76,7 +76,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen primary-bg-container flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-sm bg-foreground rounded-[20px] shadow-lg p-6 space-y-6 flex flex-col items-center">
+      <div className="w-full max-w-sm div-bg rounded-[20px] shadow-lg p-6 space-y-6 flex flex-col items-center">
         <div className="relative w-28 h-28 mb-4">
           <Image
             src="/images/Logo.webp"

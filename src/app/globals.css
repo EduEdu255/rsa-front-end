@@ -1,21 +1,20 @@
-/* global.css */
-@import "tailwindcss"; /* Mantenha o import do Tailwind para as outras classes */
+@import "tailwindcss"; 
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --color-primary: #6D0B92; /* Sua cor primária */
-  --card-background: #f0f0f0; /* Exemplo para o card */
-  --color-secondary: #ededed; /* Exemplo de cor secundária */
+  --background:#F7F7F7;
+  --foreground: #fff;
+  --color-primary: #6D0B92; 
+  --card-background: #f0f0f0; 
+  --color-secondary: #fff; 
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --color-primary: #6D0B92; /* Primary no dark mode */
-    --card-background: #212121; /* Card no dark mode */
-    --color-secondary: #ededed; /* Secondary no dark mode */
+    --background: #F7F7F7;
+    --foreground: #fff;
+    --color-primary: #6D0B92; 
+    --card-background: #212121; 
+    --color-secondary: #fff; 
   }
 }
 
@@ -27,14 +26,24 @@
 }
 
 body {
-  background: var(--background); /* O body já está usando sua variável --background */
+  background: var(--background); 
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Nova classe CSS para o background do seu container principal */
+
+
+.div-bg{
+  background-color: var(--color-secondary);
+}
+
+.secondary-bg-container{
+  background-color: var(--background);
+
+}
+
 .primary-bg-container {
-    background-color: var(--color-primary); /* Aqui usamos a variável --color-primary */
+    background-color: var(--color-primary); 
 }
 
 .border-input{
@@ -56,4 +65,12 @@ body {
   background-color: none;
   color: var(--color-secondary);
   border-color: var(--color-secondary);
+}
+
+.text-secondary{
+  color: var(--color-secondary);
+}
+
+.text-primary{
+  color: var(--color-primary);
 }
