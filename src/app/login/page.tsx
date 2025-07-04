@@ -1,5 +1,5 @@
-// src/app/login/page.tsx
-"use client"; // Mantenha esta linha no topo do arquivo!
+
+"use client"; 
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,9 +47,9 @@ export default function RegisterPage() {
         <input
           type="text"
           placeholder="CPF"
-          value={cpf} // O valor do input é controlado pelo estado `cpf`
-          onChange={handleCpfChange} // Chama nossa função de manipulação e formatação
-          inputMode="numeric" // Continua sugerindo o teclado numérico em celulares
+          value={cpf} 
+          onChange={handleCpfChange} 
+          inputMode="numeric" 
           className="w-full p-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-text-dark"
         />
 

@@ -1,4 +1,4 @@
-// src/app/confirmacao/page.tsx
+
 "use client";
 
 import React from 'react';
