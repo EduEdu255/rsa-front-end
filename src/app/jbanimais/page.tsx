@@ -1,7 +1,6 @@
+"use client"; 
 
-"use client";
-
-import React, { useState } from 'react'; 
+import React, { useState, Suspense } from 'react'; 
 import { Header } from '../../components/common/Header';
 import { BottomNavBar } from '../../components/common/BottomNavBar';
 import { AnimalCard } from '../../components/animais/AnimalCard';
@@ -36,15 +35,13 @@ const animalData = [
   { id: 25, name: 'Vaca', imageSrc: '/images/vaca.webp', numbers: '97 98 99 00' },
 ];
 
-export default function AnimalGridPage() {
+function AnimalGridContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const modalidade = searchParams.get('modalidade');
 
-
   const [selectedAnimalIds, setSelectedAnimalIds] = useState<number[]>([]);
 
-  
   const handleAnimalCardClick = (animalId: number, animalName: string) => {
     setSelectedAnimalIds(prevSelected => {
       if (prevSelected.includes(animalId)) {
@@ -56,13 +53,11 @@ export default function AnimalGridPage() {
     console.log(`Animal ${animalName} (ID: ${animalId}) clicado para a modalidade: ${decodeURIComponent(modalidade || 'N/A')}`);
   };
 
-  
   const handleProceedToLottery = () => {
     if (selectedAnimalIds.length === 0) {
       alert('Por favor, selecione pelo menos um animal para continuar.');
       return;
     }
-
     
     const selectedAnimalNames = selectedAnimalIds.map(id => {
       const animal = animalData.find(a => a.id === id);
@@ -70,19 +65,16 @@ export default function AnimalGridPage() {
     }).join(',');
 
     const encodedModalidade = encodeURIComponent(modalidade || '');
-    const encodedSelectedAnimalIds = encodeURIComponent(selectedAnimalIds.join(',')); // Passa IDs separados por vírgula
+    const encodedSelectedAnimalIds = encodeURIComponent(selectedAnimalIds.join(','));
     const encodedSelectedAnimalNames = encodeURIComponent(selectedAnimalNames);
-
-   
+    
     router.push(
       `/jbpqd?modalidade=${encodedModalidade}&animalIds=${encodedSelectedAnimalIds}&animalNames=${encodedSelectedAnimalNames}`
     );
   };
 
-
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
-
+    <>
       <Header isLoggedIn={true} />
 
       <main className="flex-grow relative overflow-hidden">
@@ -128,8 +120,7 @@ export default function AnimalGridPage() {
               />
             ))}
           </div>
-
-         
+          
           <button
             onClick={handleProceedToLottery}
             className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg mt-6"
@@ -141,6 +132,15 @@ export default function AnimalGridPage() {
       </main>
 
       <BottomNavBar />
-    </div>
+    </>
+  );
+}
+
+
+export default function AnimalGridPage() {
+  return (
+    <Suspense fallback={<div>Carregando seleção de animais...</div>}>
+      <AnimalGridContent />
+    </Suspense>
   );
 }
