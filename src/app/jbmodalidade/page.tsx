@@ -2,9 +2,7 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 
 import { Header } from '../../components/common/Header';
 import { BottomNavBar } from '../../components/common/BottomNavBar';
@@ -13,13 +11,11 @@ import { GameModeCard } from '../../components/modalidades/GameModeCard';
 export default function JogoDoBichoPage() {
   const router = useRouter();
 
-  
   const handleCardClick = (mode: string) => {
     const encodedMode = encodeURIComponent(mode);
-    router.push(`/jbanimais?modalidade=${encodedMode}`); 
+    router.push(`/jbanimais?modalidade=${encodedMode}`);
   };
 
-  
   const gameModes = [
     { mode: "CENTENA", payout: "800x" },
     { mode: "CENTENA INV", payout: "800x" },
@@ -51,36 +47,28 @@ export default function JogoDoBichoPage() {
 
         <div className="absolute inset-0 striped-background"></div>
 
-
         <div className="relative flex-row items-center z-10 w-full max-w-lg mx-auto p-4 md:p-6 lg:p-8 min-h-[calc(100vh-120px)] rounded-lg shadow-lg my-4">
 
           <div className="flex items-center justify-center gap-4 mb-6">
             <button
               onClick={() => router.back()}
-
-              className="text-foreground  text-primary text-3xl font-bold p-1 rounded-full hover:bg-gray-200 transition-colors duration-200"
+              className="text-foreground text-primary text-3xl font-bold p-1 rounded-full hover:bg-gray-200 transition-colors duration-200"
               aria-label="Voltar"
             >
               ←
             </button>
-
             <h1 className="text-foreground text-primary text-4xl md:text-3xl font-bold">Jogo do Bicho</h1>
           </div>
 
-
           <div className="mb-6">
-
             <p className=" text-lg md:text-xl text-primary font-bold mb-1">Modalidade:</p>
-
             <p className="text-sm text-black md:text-base">Escolha a modalidade de jogo.</p>
           </div>
 
-
           <div className="space-y-4 ">
-          
             {gameModes.map((game, index) => (
               <GameModeCard
-                key={index} 
+                key={index}
                 mode={game.mode}
                 payout={game.payout}
                 onClick={() => handleCardClick(game.mode)}
@@ -89,7 +77,6 @@ export default function JogoDoBichoPage() {
           </div>
         </div>
       </main>
-
 
       <BottomNavBar />
     </div>

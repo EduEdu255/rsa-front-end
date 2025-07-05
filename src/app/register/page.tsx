@@ -79,7 +79,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-sm div-bg rounded-[20px] shadow-lg p-6 space-y-6 flex flex-col items-center">
         <div className="relative w-28 h-28 mb-4">
           <Image
-            src="/images/Logo.webp"
+            src="/images/Logo.png"
             alt="H2bicho Logo"
             fill
             style={{ objectFit: 'contain' }}

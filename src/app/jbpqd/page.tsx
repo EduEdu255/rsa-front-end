@@ -1,42 +1,41 @@
+
 "use client";
 
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useMemo } from 'react'; 
 import { Header } from '../../components/common/Header';
 import { BottomNavBar } from '../../components/common/BottomNavBar';
-import { useRouter, useSearchParams } from 'next/navigation'; 
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function SelectLotteryPage() {
   const router = useRouter();
-  const searchParams = useSearchParams(); 
-
+  const searchParams = useSearchParams();
 
   const modalidadeParam = searchParams.get('modalidade');
   const animalIdsParam = searchParams.get('animalIds');
   const animalNamesParam = searchParams.get('animalNames');
 
-
-  const modalidade = modalidadeParam ? decodeURIComponent(modalidadeParam) : 'N/A';
-  const selectedAnimalIds = animalIdsParam ? animalIdsParam.split(',').map(Number) : [];
-  const selectedAnimalNames = animalNamesParam ? decodeURIComponent(animalNamesParam).split(',') : [];
-
+ 
+  const modalidade = useMemo(() => modalidadeParam ? decodeURIComponent(modalidadeParam) : 'N/A', [modalidadeParam]);
+  const selectedAnimalIds = useMemo(() => animalIdsParam ? animalIdsParam.split(',').map(Number) : [], [animalIdsParam]);
+  const selectedAnimalNames = useMemo(() => animalNamesParam ? decodeURIComponent(animalNamesParam).split(',') : [], [animalNamesParam]);
 
   const [selectedPosition, setSelectedPosition] = useState<string>('1º Prêmio');
   const [betAmount, setBetAmount] = useState<string>('0,00');
   const [selectedType, setSelectedType] = useState<string>('Todos');
 
- 
   useEffect(() => {
     console.log('Modalidade recebida:', modalidade);
     console.log('IDs de animais selecionados:', selectedAnimalIds);
     console.log('Nomes de animais selecionados:', selectedAnimalNames);
-  }, [modalidade, selectedAnimalIds, selectedAnimalNames]); 
+  }, [modalidade, selectedAnimalIds, selectedAnimalNames]);
 
   const formatCurrency = (value: string): string => {
     let cleanValue = value.replace(/\D/g, '');
     if (cleanValue.length < 2) {
       cleanValue = cleanValue.padStart(2, '0');
     }
-    let formatted = (parseInt(cleanValue, 10) / 100).toFixed(2).replace('.', ',');
+   
+    const formatted = (parseInt(cleanValue, 10) / 100).toFixed(2).replace('.', ',');
     return formatted;
   };
 
@@ -51,15 +50,11 @@ export default function SelectLotteryPage() {
     setBetAmount(formatCurrency(newAmount.toFixed(2).replace('.', '')));
   };
 
-  
   const handleFinalContinue = () => {
- 
-
     if (parseFloat(betAmount.replace(',', '.')) <= 0) {
       alert('Por favor, informe um valor de aposta válido.');
       return;
     }
-
 
     console.log('Dados finais da aposta:');
     console.log('Modalidade:', modalidade);
@@ -76,20 +71,17 @@ export default function SelectLotteryPage() {
       position: encodeURIComponent(selectedPosition),
       betAmount: encodeURIComponent(betAmount),
       betType: encodeURIComponent(selectedType),
+      
+      lotteryId: searchParams.get('lotteryId') || '',
+      lotteryName: searchParams.get('lotteryName') || '',
     }).toString();
 
-     router.push(`/jblottery?${queryParams}`);
-
-
-    
-
    
+    router.push(`/jbgame-details?${queryParams}`);
   };
-
 
   return (
     <div className="text-primary flex flex-col min-h-screen bg-background text-black">
-
       <Header isLoggedIn={true} />
 
       <main className="text-primary flex-grow relative overflow-hidden">
@@ -107,7 +99,6 @@ export default function SelectLotteryPage() {
             <h1 className="text-primary text-primary text-4xl md:text-3xl font-bold">Jogo do Bicho</h1>
           </div>
 
-          
           <div className="mb-6">
             <p className="text-primary text-lg md:text-xl font-bold mb-1">
               Modalidade: <span className="text-black">{modalidade}</span>
@@ -119,7 +110,6 @@ export default function SelectLotteryPage() {
             )}
             <h2 className="text-primary text-black text-xl md:text-2xl font-bold mb-4 mt-4">Posição, quantia e divisão</h2>
           </div>
-
 
           <div className="text-primary mb-6">
             <p className="text-primary text-black text-primary text-lg md:text-xl font-bold mb-3">Selecione a posição:</p>
@@ -151,13 +141,11 @@ export default function SelectLotteryPage() {
             </div>
           </div>
 
-
           <div className="text-primary mb-6">
             <p className="text-primary text-black text-lg md:text-xl font-bold mb-2">Informe o valor:</p>
             <p className="text-primary text-black text-sm mb-4">
               O valor mínimo para apostar é de R$0,10 e o valor máximo é de R$5.000,00.
             </p>
-
 
             <div className="text-primary relative flex items-center mb-4">
               <span className="text-primary absolute left-3 text-black text-xl font-bold">R$</span>
@@ -169,7 +157,6 @@ export default function SelectLotteryPage() {
                 className="text-primary w-full pl-12 pr-4 py-3 bg-gray-100 rounded-lg text-black text-2xl md:text-3xl font-bold focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
-
 
             <div className="text-primary flex gap-2 mb-6">
               <button
@@ -199,10 +186,10 @@ export default function SelectLotteryPage() {
             </div>
           </div>
 
-
           <div className="text-primary mb-6">
             <p className="text-primary text-black text-sm mb-4">
-              <span className="text-primary font-bold">"Todo"</span> significa que o valor será dividido entre todos os palpites, enquanto <span className="text-primary font-bold">"Cada"</span> significa que o valor será apostado para cada palpite.
+              
+              <span className="text-primary font-bold">&quot;Todo&quot;</span> significa que o valor será dividido entre todos os palpites, enquanto <span className="text-primary font-bold">&quot;Cada&quot;</span> significa que o valor será apostado para cada palpite.
             </p>
             <div className="text-primary flex gap-4">
               <button
@@ -226,17 +213,14 @@ export default function SelectLotteryPage() {
             </div>
           </div>
 
-    
           <button
             onClick={handleFinalContinue}
             className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg mt-6"
           >
             Continuar
           </button>
-
         </div>
       </main>
-
 
       <BottomNavBar />
     </div>

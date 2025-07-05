@@ -1,5 +1,5 @@
 
-'use client'; 
+'use client';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 
 export function HeroSlider() {
   const images = [
-    '/images/JogoDoBichoIMG.webp', 
+    '/images/JogoDoBichoIMG.webp',
     '/images/JogoDoBichoSlider.webp',
   ];
 
@@ -23,6 +23,7 @@ export function HeroSlider() {
       >
         {images.map((src, index) => (
           <SwiperSlide key={index}>
+            
             <img src={src} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
           </SwiperSlide>
         ))}

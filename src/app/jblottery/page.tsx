@@ -1,34 +1,32 @@
 
 "use client";
 
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useMemo } from 'react'; 
 import { Header } from '../../components/common/Header';
 import { BottomNavBar } from '../../components/common/BottomNavBar';
-import { useRouter, useSearchParams } from 'next/navigation'; 
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function SelectLotteryPage() {
   const router = useRouter();
-  const searchParams = useSearchParams(); 
+  const searchParams = useSearchParams();
 
- 
   const modalidadeParam = searchParams.get('modalidade');
   const animalIdsParam = searchParams.get('animalIds');
   const animalNamesParam = searchParams.get('animalNames');
 
 
-  const modalidade = modalidadeParam ? decodeURIComponent(modalidadeParam) : 'N/A';
-  const selectedAnimalIds = animalIdsParam ? animalIdsParam.split(',').map(Number) : [];
-  const selectedAnimalNames = animalNamesParam ? decodeURIComponent(animalNamesParam).split(',') : [];
+  const modalidade = useMemo(() => modalidadeParam ? decodeURIComponent(modalidadeParam) : 'N/A', [modalidadeParam]);
+  const selectedAnimalIds = useMemo(() => animalIdsParam ? animalIdsParam.split(',').map(Number) : [], [animalIdsParam]);
+  const selectedAnimalNames = useMemo(() => animalNamesParam ? decodeURIComponent(animalNamesParam).split(',') : [], [animalNamesParam]);
 
   const [selectedLottery, setSelectedLottery] = useState<string | null>(null);
 
-  
   useEffect(() => {
     console.log('Dados recebidos da página anterior:');
     console.log('Modalidade:', modalidade);
     console.log('IDs de animais selecionados:', selectedAnimalIds);
     console.log('Nomes de animais selecionados:', selectedAnimalNames);
-  }, [modalidade, selectedAnimalIds, selectedAnimalNames]);
+  }, [modalidade, selectedAnimalIds, selectedAnimalNames]); 
 
   const loterias = {
     Nacional: [
@@ -41,13 +39,11 @@ export default function SelectLotteryPage() {
     ],
   };
 
-
   const handleContinuarClick = () => {
     if (!selectedLottery) {
       alert('Por favor, selecione uma loteria antes de continuar.');
       return;
     }
-
 
     let selectedLotteryName = '';
     for (const group of Object.values(loterias)) {
@@ -58,31 +54,25 @@ export default function SelectLotteryPage() {
       }
     }
 
-  
     const queryParams = new URLSearchParams({
       modalidade: encodeURIComponent(modalidade),
       animalIds: encodeURIComponent(selectedAnimalIds.join(',')),
       animalNames: encodeURIComponent(selectedAnimalNames.join(',')),
       lotteryId: encodeURIComponent(selectedLottery),
-      lotteryName: encodeURIComponent(selectedLotteryName), 
+      lotteryName: encodeURIComponent(selectedLotteryName),
     }).toString();
-
 
     router.push(`/jbgame-details?${queryParams}`); 
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-primary">
-
       <Header isLoggedIn={true} />
 
       <main className="flex-grow relative overflow-hidden">
-
         <div className="absolute inset-0 striped-background"></div>
 
-
         <div className="relative z-10 w-full max-w-lg mx-auto p-4 md:p-6 lg:p-8 content-area-bg rounded-lg shadow-lg my-4">
-
           <div className="flex items-center justify-center gap-4 mb-6">
             <button
               onClick={() => router.back()}
@@ -93,7 +83,6 @@ export default function SelectLotteryPage() {
             </button>
             <h1 className="text-primary text-4xl md:text-3xl font-bold">Jogo do Bicho</h1>
           </div>
-
 
           <div className="mb-6">
             <p className="text-primary text-lg md:text-xl font-bold mb-1">
@@ -106,7 +95,6 @@ export default function SelectLotteryPage() {
             )}
             <h2 className="text-primary text-xl md:text-2xl font-bold mb-4 mt-4">Selecione as loterias:</h2>
           </div>
-
 
           <div className="space-y-6 mb-8">
             {Object.entries(loterias).map(([groupName, groupOptions]) => (
@@ -142,18 +130,14 @@ export default function SelectLotteryPage() {
             ))}
           </div>
 
-
-    
           <button
             onClick={handleContinuarClick}
             className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg"
           >
             Continuar
           </button>
-
         </div>
       </main>
-
 
       <BottomNavBar />
     </div>
