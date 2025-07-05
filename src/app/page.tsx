@@ -34,7 +34,7 @@ export default function HomePage() {
           <h2 className="text-[35px] font-bold text-purple-900 mb-4">Jogar</h2>
           <Link href="/login" passHref className="w-full">         
             <div className="flex justify-center">
-            <GameCard imageUrl="/images/JogoDoBichoimg.webp" /> 
+            <GameCard imageUrl="/images/JogoDoBichoIMG.webp" /> 
             </div>
           
           </Link>

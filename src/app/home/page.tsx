@@ -36,7 +36,7 @@ export default function HomePage() {
 
           <Link href="/jbmodalidade" passHref className="w-full">
             <div className="flex justify-center">
-              <GameCard imageUrl="/images/JogoDoBichoimg.webp" />
+              <GameCard imageUrl="/images/JogoDoBichoIMG.webp" />
             </div>
           </Link>
 
