@@ -1,19 +1,18 @@
-
 "use client";
 
-import React, { useState, useEffect, useMemo } from 'react'; 
+import React, { useState, useEffect, useMemo, Suspense } from 'react'; // Adicionado Suspense aqui
 import { Header } from '../../components/common/Header';
 import { BottomNavBar } from '../../components/common/BottomNavBar';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function SelectLotteryPage() {
+// Componente que contém toda a lógica e UI que usa useSearchParams
+function SelectLotteryContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const modalidadeParam = searchParams.get('modalidade');
   const animalIdsParam = searchParams.get('animalIds');
   const animalNamesParam = searchParams.get('animalNames');
-
 
   const modalidade = useMemo(() => modalidadeParam ? decodeURIComponent(modalidadeParam) : 'N/A', [modalidadeParam]);
   const selectedAnimalIds = useMemo(() => animalIdsParam ? animalIdsParam.split(',').map(Number) : [], [animalIdsParam]);
@@ -62,6 +61,7 @@ export default function SelectLotteryPage() {
       lotteryName: encodeURIComponent(selectedLotteryName),
     }).toString();
 
+    // Observe que a rota está indo para /jbgame-details, então os parâmetros serão passados corretamente para lá.
     router.push(`/jbgame-details?${queryParams}`); 
   };
 
@@ -141,5 +141,14 @@ export default function SelectLotteryPage() {
 
       <BottomNavBar />
     </div>
+  );
+}
+
+// Este é o componente que será exportado como a página, envolvendo o conteúdo com Suspense
+export default function SelectLotteryPage() {
+  return (
+    <Suspense fallback={<div>Carregando loterias...</div>}>
+      <SelectLotteryContent />
+    </Suspense>
   );
 }
