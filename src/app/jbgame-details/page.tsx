@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, Suspense } from 'react'; 
+import React, { Suspense } from 'react'; 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Header } from '../../components/common/Header';
 import { BottomNavBar } from '../../components/common/BottomNavBar';

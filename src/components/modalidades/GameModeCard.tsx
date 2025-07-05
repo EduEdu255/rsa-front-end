@@ -1,4 +1,4 @@
-// src/app/components/GameModeCard.tsx
+
 import React from 'react';
 
 interface GameModeCardProps {
