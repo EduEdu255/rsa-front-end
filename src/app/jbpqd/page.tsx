@@ -81,7 +81,7 @@ export default function SelectLotteryPage() {
      router.push(`/jblottery?${queryParams}`);
 
 
-    alert('Aposta enviada! Verifique o console para os dados.');
+    
 
    
   };

@@ -102,7 +102,7 @@ export default function AnimalGridPage() {
 
           <div className="mb-6">
             <p className="text-primary text-lg md:text-xl font-bold mb-1">
-              Modalidade: <span className="text-foreground">{decodeURIComponent(modalidade || 'N/A')}</span>
+              Modalidade: <span className="text-black">{decodeURIComponent(modalidade || 'N/A')}</span>
             </p>
             <p className="text-black text-sm md:text-base">Escolha os Animais.</p>
             

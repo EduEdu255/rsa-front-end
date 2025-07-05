@@ -2,7 +2,7 @@
 
 export function ResultCard({ type, date }: { type: string, date: string }) {
   return (
-    <div className="bg-purple-100 p-4 rounded-lg flex justify-between items-center border-botton-1 border-black">
+    <div className="secondary-bg-container p-4 rounded-lg flex justify-between items-center border-botton-1 border-black">
       <div>
         <p className="font-bold text-[30px] text-primary">{type}</p>
         <p className="text-sm text-black">{date}</p>
