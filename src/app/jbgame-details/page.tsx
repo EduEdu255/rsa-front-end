@@ -1,38 +1,34 @@
 "use client";
 
-import React from 'react';
+import React, { useState, Suspense } from 'react'; 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Header } from '../../components/common/Header';
 import { BottomNavBar } from '../../components/common/BottomNavBar';
 
 
-export default function ConfirmacaoPage() {
+function ConfirmacaoContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
 
   const modalidade = searchParams.get('modalidade') || 'N/A';
   const animalIds = searchParams.get('animalIds') || '';
   const animalNames = searchParams.get('animalNames') || '';
-  const position = searchParams.get('position') || 'N/A'; 
-  const betAmount = searchParams.get('betAmount') || '0,00'; 
+  const position = searchParams.get('position') || 'N/A';
+  const betAmount = searchParams.get('betAmount') || '0,00';
   const betType = searchParams.get('betType') || 'Todos';
 
-  
   const decodedModalidade = decodeURIComponent(modalidade);
   const decodedAnimalNames = decodeURIComponent(animalNames).split(',').filter(name => name.trim() !== '');
   const decodedAnimalIds = animalIds.split(',').map(Number).filter(id => !isNaN(id));
   const decodedPosition = decodeURIComponent(position); 
   const decodedBetAmount = decodeURIComponent(betAmount); 
-
   const puleNumber = "H2bicho";
-  const validityDate = "25/06/2025"; 
-  const vendorId = "606610"; 
+  const validityDate = "25/06/2025";
+  const vendorId = "606610";
   const status = "PENDENTE";
 
-  const loteriaSelecionada = "LT NACIONAL 23HS"; 
+  const loteriaSelecionada = "LT NACIONAL 23HS";
 
- 
   const totalBetValue = parseFloat(decodedBetAmount.replace(',', '.'));
 
   const handleFinalizarAposta = () => {
@@ -44,20 +40,19 @@ export default function ConfirmacaoPage() {
       modalidade: decodedModalidade,
       animais: decodedAnimalNames,
       idsAnimais: decodedAnimalIds,
-      posicao: decodedPosition, 
-      valorAposta: decodedBetAmount, 
-      tipoAposta: betType, 
+      posicao: decodedPosition,
+      valorAposta: decodedBetAmount,
+      tipoAposta: betType,
       loteria: loteriaSelecionada,
       totalCalculado: totalBetValue
     });
 
     alert("Aposta finalizada! (Ainda não integrado com o Back-end)");
-    
-    router.push('/home'); 
+    router.push('/home');
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <>
       <Header isLoggedIn={true} />
 
       <main className="flex-grow relative overflow-hidden">
@@ -99,7 +94,7 @@ export default function ConfirmacaoPage() {
 
               <div className="mb-3 ml-4">
                 <p className="text-gray-700 font-bold">
-                  {decodedModalidade} - {decodedPosition} 
+                  {decodedModalidade} - {decodedPosition}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-1">
                   {decodedAnimalNames.map((name, index) => (
@@ -108,19 +103,17 @@ export default function ConfirmacaoPage() {
                     </span>
                   ))}
                 </div>
-                <p className="text-gray-700 text-sm mt-2">{decodedBetAmount} / {betType.toUpperCase()}</p> 
-                
+                <p className="text-gray-700 text-sm mt-2">{decodedBetAmount} / {betType.toUpperCase()}</p>
                 <p className="text-green-600 text-sm font-semibold">Possível Prêmio: R$ {(totalBetValue * 800).toFixed(2).replace('.', ',')}</p>
               </div>
             </div>
 
             <div className="border-t pt-4 border-gray-200 mt-6 flex justify-between items-center">
               <p className="text-primary text-xl font-bold">TOTAL:</p>
-              <p className="text-primary text-2xl font-bold">R$ {decodedBetAmount}</p> 
+              <p className="text-primary text-2xl font-bold">R$ {decodedBetAmount}</p>
             </div>
           </div>
 
-          
           <button
             onClick={handleFinalizarAposta}
             className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg mt-6"
@@ -131,6 +124,15 @@ export default function ConfirmacaoPage() {
       </main>
 
       <BottomNavBar />
-    </div>
+    </>
+  );
+}
+
+
+export default function ConfirmacaoPage() {
+  return (
+    <Suspense fallback={<div>Carregando confirmação...</div>}>
+      <ConfirmacaoContent />
+    </Suspense>
   );
 }

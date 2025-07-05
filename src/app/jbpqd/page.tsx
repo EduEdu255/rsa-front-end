@@ -1,12 +1,12 @@
-
 "use client";
 
-import React, { useState, useEffect, useMemo } from 'react'; 
+import React, { useState, useEffect, useMemo, Suspense } from 'react'; 
 import { Header } from '../../components/common/Header';
 import { BottomNavBar } from '../../components/common/BottomNavBar';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function SelectLotteryPage() {
+
+function SelectLotteryContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -14,7 +14,6 @@ export default function SelectLotteryPage() {
   const animalIdsParam = searchParams.get('animalIds');
   const animalNamesParam = searchParams.get('animalNames');
 
- 
   const modalidade = useMemo(() => modalidadeParam ? decodeURIComponent(modalidadeParam) : 'N/A', [modalidadeParam]);
   const selectedAnimalIds = useMemo(() => animalIdsParam ? animalIdsParam.split(',').map(Number) : [], [animalIdsParam]);
   const selectedAnimalNames = useMemo(() => animalNamesParam ? decodeURIComponent(animalNamesParam).split(',') : [], [animalNamesParam]);
@@ -34,7 +33,7 @@ export default function SelectLotteryPage() {
     if (cleanValue.length < 2) {
       cleanValue = cleanValue.padStart(2, '0');
     }
-   
+    
     const formatted = (parseInt(cleanValue, 10) / 100).toFixed(2).replace('.', ',');
     return formatted;
   };
@@ -75,8 +74,7 @@ export default function SelectLotteryPage() {
       lotteryId: searchParams.get('lotteryId') || '',
       lotteryName: searchParams.get('lotteryName') || '',
     }).toString();
-
-   
+    
     router.push(`/jbgame-details?${queryParams}`);
   };
 
@@ -188,7 +186,6 @@ export default function SelectLotteryPage() {
 
           <div className="text-primary mb-6">
             <p className="text-primary text-black text-sm mb-4">
-              
               <span className="text-primary font-bold">&quot;Todo&quot;</span> significa que o valor será dividido entre todos os palpites, enquanto <span className="text-primary font-bold">&quot;Cada&quot;</span> significa que o valor será apostado para cada palpite.
             </p>
             <div className="text-primary flex gap-4">
@@ -224,5 +221,14 @@ export default function SelectLotteryPage() {
 
       <BottomNavBar />
     </div>
+  );
+}
+
+
+export default function SelectLotteryPage() {
+  return (
+    <Suspense fallback={<div>Carregando opções de aposta...</div>}>
+      <SelectLotteryContent />
+    </Suspense>
   );
 }
