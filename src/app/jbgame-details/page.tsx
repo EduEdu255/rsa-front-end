@@ -123,7 +123,7 @@ function ConfirmacaoContent() {
         </div>
       </main>
 
-      <BottomNavBar />
+      
     </>
   );
 }

@@ -1,16 +1,13 @@
 // src/app/layout.tsx
-"use client"; // <--- ADICIONE ESTA LINHA AQUI!
+"use client"; // ESSENCIAL: Permite usar hooks de cliente como useState
 
 import './globals.css';
 import React, { useState } from 'react'; // Importe useState
 import { Header } from '../components/common/Header'; // Importe a Header
 import { BottomNavBar } from '../components/common/BottomNavBar'; // Importe a BottomNavBar
 import { SideMenu } from '../components/common/SideMenu'; // Importe a SideMenu
-
-// Você pode remover a importação de 'Inter' se não estiver usando a fonte globalmente,
-// mas vou mantê-la aqui por segurança se ela estiver no seu projeto original.
-// import { Inter } from 'next/font/google';
-// const inter = Inter({ subsets: ['latin'] });
+// import { Inter } from 'next/font/google'; // Removido se não estiver usando
+// const inter = Inter({ subsets: ['latin'] }); // Removido se não estiver usando
 
 
 export default function RootLayout({
@@ -28,16 +25,20 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        <div className="bg-gray-100 min-h-screen flex flex-col"> {/* Adicione um container principal */}
+        {/* Container principal do layout para flexbox e fundo */}
+        <div className="bg-gray-100 min-h-screen flex flex-col"> 
           {/* Header persistente em todas as páginas */}
-          <Header isLoggedIn={false} /> {/* Ajuste 'isLoggedIn' conforme sua lógica de autenticação */}
+          {/* A Header não precisa mais de onMenuClick, pois o botão está na BottomNavBar */}
+          <Header isLoggedIn={false} /> 
 
-          <main className="flex-grow pb-20"> {/* main que contém o conteúdo da página */}
+          {/* main que contém o conteúdo da página, cresce para preencher o espaço */}
+          <main className="flex-grow pb-20"> 
             {children} {/* Aqui é onde o conteúdo da página atual será renderizado */}
           </main>
 
           {/* BottomNavBar persistente em todas as páginas, com o botão de menu */}
-          <BottomNavBar onMenuOpen={openSideMenu} />
+          {/* IMPORTANTE: Passar a prop onMenuOpen para a BottomNavBar */}
+          <BottomNavBar onMenuOpen={openSideMenu} /> 
 
           {/* SideMenu que será controlado pelo estado */}
           <SideMenu isOpen={isSideMenuOpen} onClose={closeSideMenu} />

@@ -132,7 +132,7 @@ function ResultadosContent() {
                 </div>
             </main>
 
-            <BottomNavBar />
+            
         </div>
     );
 }

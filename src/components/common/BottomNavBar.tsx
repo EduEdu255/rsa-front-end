@@ -5,18 +5,18 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 
 interface BottomNavBarProps {
-  onMenuOpen: () => void; // <-- Nova prop: função para abrir o menu
+  onMenuOpen: () => void; // <-- ESSENCIAL: A prop que abre o menu lateral
 }
 
-export function BottomNavBar({ onMenuOpen }: BottomNavBarProps) { // Recebe a nova prop
+export function BottomNavBar({ onMenuOpen }: BottomNavBarProps) { 
   const pathname = usePathname();
 
   const navItems = [
     { name: 'Suporte', type: 'image', src: '/SuportIcon.svg', href: '/suporte' },
     { name: 'Carteira', type: 'image', src: '/CarteiraIcon.svg', href: '/carteira' },
     { name: 'Apostar', type: 'image', src: '/dolar.svg', href: '/jbmodalidade' },
-    { name: 'Resultados', type: 'image', src: '/ResultadosIcon.svg', href: '/resultados' },
-    { name: 'Menu', type: 'image', src: '/MenuIcon.svg', href: '/menu', isSpecialButton: true }, // Marcador para o botão de menu
+    { name: 'Resultados', type: 'image', src: '/ResultadosIcon.svg', href: '/jbresultados' }, // Ajustei para /jbresultados
+    { name: 'Menu', type: 'image', src: '/MenuIcon.svg', href: '#', isSpecialButton: true }, // href="#" para botão especial
   ];
 
   return (

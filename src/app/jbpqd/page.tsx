@@ -219,7 +219,7 @@ function SelectLotteryContent() {
         </div>
       </main>
 
-      <BottomNavBar />
+      
     </div>
   );
 }

@@ -2,12 +2,15 @@
 "use client"; // Manter "use client"
 
 import React, { useState, useEffect } from 'react';
-import { Header } from '../components/common/Header'; 
+// REMOVA ESTAS LINHAS:
+// import { Header } from '../components/common/Header'; 
+// import { BottomNavBar } from '../components/common/BottomNavBar';
+// import { SideMenu } from '../components/common/SideMenu'; 
+
 import { HeroSlider } from '../components/home/HeroSlider';
 import { GameCard } from '../components/home/GameCard';
 import { ResultCard } from '../components/home/ResultCard'; 
 import { WinnerCard } from '../components/home/WinnerCard';
-import { BottomNavBar } from '../components/common/BottomNavBar';
 import Link from 'next/link';
 
 // Helper para gerar um nome aleatório (apenas para simulação)
@@ -45,14 +48,18 @@ export default function HomePage() {
   const results = [
     { id: 1, type: 'Federal 19H', date: 'Sábado, 21 de Junho de 2025', lotteryId: 'federal-19h', fullDate: '2025-06-21' },
     { id: 2, type: 'Loteria Nacional 23HS', date: 'Sexta, 20 de Junho de 2025', lotteryId: 'loteria-nacional-23hs', fullDate: '2025-06-20' },
-    // CORREÇÃO AQUI: 'look-goias-14h' com 'h' minúsculo para consistência
     { id: 3, type: 'Look Goias 14H', date: 'Sexta, 20 de Junho de 2025', lotteryId: 'look-goias-14h', fullDate: '2025-06-20' }, 
     { id: 4, type: 'Rio 14H', date: 'Sexta, 20 de Junho de 2025', lotteryId: 'rio-14h', fullDate: '2025-06-20' },
   ];
 
   const [currentWinners, setCurrentWinners] = useState<WinnerDataType[]>([]); 
 
-  const fetchWinners = () => {
+  // REMOVA ESTAS LINHAS DE ESTADO E FUNÇÕES DO MENU:
+  // const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  // const openSideMenu = () => setIsSideMenuOpen(true);
+  // const closeSideMenu = () => setIsSideMenuOpen(false);
+
+  const fetchWinners = () => { 
     console.log('Buscando novos ganhadores...');
     
     const now = new Date(); 
@@ -106,10 +113,11 @@ export default function HomePage() {
   }, []); 
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <Header isLoggedIn={false} /> 
+    // REMOVA ESTE DIV EXTERNO, ELE SERÁ FORNECIDO PELO LAYOUT
+    // <div className="bg-gray-100 min-h-screen"> 
+    //   <Header isLoggedIn={false} /> 
 
-      <div className="p-9 space-y-6">
+      <div className="p-9 space-y-6"> {/* Este div será o 'children' dentro do layout */}
         <HeroSlider />
 
         <section className="text-center mt-6">
@@ -149,7 +157,8 @@ export default function HomePage() {
           </div>
         </section>
       </div>
-      <BottomNavBar/>
-    </div>
+   
+     
+    // </div>
   );
 }

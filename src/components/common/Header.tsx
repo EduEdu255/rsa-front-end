@@ -1,15 +1,21 @@
-
 import React from 'react';
 import Link from 'next/link';
 
+// Removida a prop 'onMenuClick' da interface
+interface HeaderProps {
+    isLoggedIn?: boolean; // Tornada opcional para flexibilidade
+}
 
-export function Header({ isLoggedIn = false }) {
+// Removida a prop 'onMenuClick' da desestruturação
+export function Header({ isLoggedIn = false }: HeaderProps) {
     return (
         <header className="primary-bg-container text-secondary p-9 px-5 flex justify-between items-center h-16">
             {isLoggedIn ? (
                 <>
+                    <Link href="/home">  
+                        <img src="/images/logo.webp" alt="Logo" /> 
+                    </Link>
                     
-                    <img src="/images/logo.webp" alt="Logo" /> 
 
                     <div className='flex '>
                         <Link href="/depositar" className="bg-white font-bold m-3 p-1 rounded-full text-sm text-primary flex items-center gap-1">
@@ -19,7 +25,6 @@ export function Header({ isLoggedIn = false }) {
                         <div className="flex items-center gap-2 bg-white p-2 rounded-[15px]">
                             <span className="font-bold text-primary text-lg">R$ 0,00</span>
                             <Link href="/perfil" className="text-2xl">
-                                
                                 <img src="/PerfilIcon.svg" alt="Ícone de Perfil" /> 
                             </Link>
                         </div>
@@ -27,8 +32,9 @@ export function Header({ isLoggedIn = false }) {
                 </>
             ) : (
                 <>
-                  
-                    <img src="/images/logo.webp" alt="Logo" /> 
+                    <Link href="/">  
+                        <img src="/images/logo.webp" alt="Logo" /> 
+                    </Link>
                     <div className="flex gap-2">
                         <Link href="/login" className="button-bg-dark-secondary px-4 py-2 border-2 rounded-lg text-sm">Entrar</Link>
                         <Link href="/register" className="button-bg-dark px-4 py-2 rounded-lg text-sm">Registrar</Link>

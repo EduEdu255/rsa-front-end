@@ -131,7 +131,7 @@ function AnimalGridContent() {
         </div>
       </main>
 
-      <BottomNavBar />
+      
     </>
   );
 }
