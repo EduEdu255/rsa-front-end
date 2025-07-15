@@ -115,7 +115,7 @@ export default function HomePage() {
 
       <section className="text-center mt-6">
         <h2 className="text-[35px] font-bold text-purple-900 mb-4">Jogar</h2>
-        <Link href="/login" passHref className="w-full">
+        <Link href="/jbmodalidade" passHref className="w-full">
           <div className="flex justify-center">
             <GameCard imageUrl="/images/JogoDoBichoIMG.webp" />
           </div>
