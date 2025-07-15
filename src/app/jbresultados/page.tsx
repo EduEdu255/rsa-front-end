@@ -4,7 +4,7 @@
 import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Header } from '../../components/common/Header';
-import { BottomNavBar } from '../../components/common/BottomNavBar';
+
 import { useRouter } from 'next/navigation';
 
 interface ResultadoDetalhes {

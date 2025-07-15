@@ -2,7 +2,7 @@
 
 import React, { useState, Suspense } from 'react'; 
 import { Header } from '../../components/common/Header';
-import { BottomNavBar } from '../../components/common/BottomNavBar';
+
 import { AnimalCard } from '../../components/animais/AnimalCard';
 import { useRouter, useSearchParams } from 'next/navigation';
 

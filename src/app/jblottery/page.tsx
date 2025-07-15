@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, Suspense } from 'react'; // Adicionado Suspense aqui
 import { Header } from '../../components/common/Header';
-import { BottomNavBar } from '../../components/common/BottomNavBar';
+
 import { useRouter, useSearchParams } from 'next/navigation';
 
 // Componente que contém toda a lógica e UI que usa useSearchParams

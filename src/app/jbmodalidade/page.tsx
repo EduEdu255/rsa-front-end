@@ -5,7 +5,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Header } from '../../components/common/Header';
-import { BottomNavBar } from '../../components/common/BottomNavBar';
+
 import { GameModeCard } from '../../components/modalidades/GameModeCard';
 
 export default function JogoDoBichoPage() {
