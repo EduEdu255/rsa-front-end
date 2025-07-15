@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, Suspense } from 'react'; // Adicionado Suspense aqui
-import { Header } from '../../components/common/Header';
+
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -67,7 +67,7 @@ function SelectLotteryContent() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-primary">
-      <Header isLoggedIn={true} />
+      
 
       <main className="flex-grow relative overflow-hidden">
         <div className="absolute inset-0 striped-background"></div>

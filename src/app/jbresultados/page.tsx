@@ -3,7 +3,7 @@
 
 import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Header } from '../../components/common/Header';
+
 
 import { useRouter } from 'next/navigation';
 
@@ -87,7 +87,7 @@ function ResultadosContent() {
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-primary">
-            <Header isLoggedIn={true} />
+
 
             <main className="flex-grow relative overflow-hidden">
                 <div className="absolute inset-0 striped-background"></div>

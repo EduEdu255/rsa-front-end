@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, Suspense } from 'react'; 
-import { Header } from '../../components/common/Header';
+
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -80,7 +80,7 @@ function SelectLotteryContent() {
 
   return (
     <div className="text-primary flex flex-col min-h-screen bg-background text-black">
-      <Header isLoggedIn={true} />
+ 
 
       <main className="text-primary flex-grow relative overflow-hidden">
         <div className="text-primary absolute inset-0 striped-background"></div>

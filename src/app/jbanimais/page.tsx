@@ -1,7 +1,7 @@
 "use client"; 
 
 import React, { useState, Suspense } from 'react'; 
-import { Header } from '../../components/common/Header';
+
 
 import { AnimalCard } from '../../components/animais/AnimalCard';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -75,7 +75,7 @@ function AnimalGridContent() {
 
   return (
     <>
-      <Header isLoggedIn={true} />
+      
 
       <main className="flex-grow relative overflow-hidden">
         <div className="absolute inset-0 striped-background"></div>

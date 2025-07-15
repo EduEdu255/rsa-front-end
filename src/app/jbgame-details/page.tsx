@@ -2,7 +2,7 @@
 
 import React, { Suspense } from 'react'; 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Header } from '../../components/common/Header';
+
 
 
 
@@ -53,7 +53,7 @@ function ConfirmacaoContent() {
 
   return (
     <>
-      <Header isLoggedIn={true} />
+      
 
       <main className="flex-grow relative overflow-hidden">
         <div className="absolute inset-0 striped-background"></div>

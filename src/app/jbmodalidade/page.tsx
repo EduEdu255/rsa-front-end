@@ -4,7 +4,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Header } from '../../components/common/Header';
+
 
 import { GameModeCard } from '../../components/modalidades/GameModeCard';
 
@@ -41,7 +41,7 @@ export default function JogoDoBichoPage() {
   return (
     <div className="flex flex-col min-h-screen secondary-bg-container text-foreground">
 
-      <Header isLoggedIn={true} />
+      
 
       <main className="flex-grow relative overflow-hidden">
 
