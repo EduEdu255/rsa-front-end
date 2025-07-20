@@ -1,4 +1,4 @@
-// src/app/jbgame-details/page.tsx
+
 "use client";
 
 import React, { Suspense, useState } from 'react';
@@ -84,7 +84,7 @@ function ConfirmacaoContent() {
         router.push('/home');
       }, 3000);
 
-    } catch (_) { 
+    } catch { 
       setError('Ocorreu um erro ao finalizar a aposta e deduzir o saldo. Tente novamente.');
     } finally {
       setLoading(false);

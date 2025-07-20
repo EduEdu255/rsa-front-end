@@ -1,4 +1,4 @@
-// src/app/trocar-senha/page.tsx
+
 "use client";
 
 import React, { useState } from 'react';
@@ -51,7 +51,7 @@ export default function TrocarSenhaPage() {
         router.push('/perfil');
       }, 1500);
 
-    } catch (_) { 
+    } catch { 
       setError('Falha ao trocar a senha. Tente novamente. (Mock de erro)');
     } finally {
       setLoading(false);

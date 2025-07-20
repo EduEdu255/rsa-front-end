@@ -1,4 +1,4 @@
-// src/app/depositar/page.tsx
+
 "use client";
 
 import React, { useState } from 'react';
@@ -48,7 +48,7 @@ export default function DepositarPage() {
         window.dispatchEvent(event);
       }
 
-    } catch (_) { 
+    } catch { 
       setError('Falha ao gerar o PIX. Tente novamente. (Mock de erro)');
     } finally {
       setLoading(false);

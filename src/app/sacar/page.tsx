@@ -1,4 +1,4 @@
-// src/app/sacar/page.tsx
+
 "use client";
 
 import React, { useState } from 'react';
@@ -63,7 +63,7 @@ export default function SacarPage() {
 
       setSuccessMessage(`Saque de R$ ${withdrawAmount.toFixed(2).replace('.', ',')} solicitado com sucesso! Novo saldo: R$ ${newBalance.toFixed(2).replace('.', ',')}. Transação ID: ${mockData.transactionId}. (Mock)`);
 
-    } catch (_) { 
+    } catch { 
       setError('Falha ao solicitar o saque. Tente novamente. (Mock de erro)');
     } finally {
       setLoading(false);

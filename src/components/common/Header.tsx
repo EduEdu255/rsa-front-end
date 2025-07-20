@@ -4,19 +4,19 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+
 
 export default function Header() {
-  const router = useRouter();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   const [balance, setBalance] = useState<string>('0,00');
 
 
   const loadHeaderData = () => {
     if (typeof window !== 'undefined') {
       const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
-      
+     
       const storedBalance = localStorage.getItem('userBalance') || '0,00';
 
       setIsLoggedIn(loggedInStatus);
@@ -28,7 +28,7 @@ export default function Header() {
     loadHeaderData();
 
     const handleStorageChange = (event: Event) => {
-      if (event instanceof StorageEvent && (event.key === 'isLoggedIn' || event.key === 'userBalance')) { // Removido 'userName'
+      if (event instanceof StorageEvent && (event.key === 'isLoggedIn' || event.key === 'userBalance')) { 
         loadHeaderData();
       } else if (event.type === 'balanceUpdate' && 'detail' in event && event.detail && typeof event.detail === 'object' && 'newBalance' in event.detail) {
         setBalance((event.detail as { newBalance: string }).newBalance);
@@ -58,7 +58,7 @@ export default function Header() {
       <nav>
         {isLoggedIn ? (
           <div className='flex items-center gap-4'>
-            
+           
             <Link href="/depositar" className="bg-white font-bold m-3 p-1 rounded-full text-sm text-primary flex items-center gap-1">
               Depositar {'➔'}
             </Link>
