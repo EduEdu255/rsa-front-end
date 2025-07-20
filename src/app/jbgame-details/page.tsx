@@ -1,7 +1,7 @@
 // src/app/jbgame-details/page.tsx
 "use client";
 
-import React, { Suspense, useState /* Removido useEffect pois não é usado diretamente aqui */ } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 
@@ -84,7 +84,7 @@ function ConfirmacaoContent() {
         router.push('/home');
       }, 3000);
 
-    } catch (_err) {
+    } catch (_) { 
       setError('Ocorreu um erro ao finalizar a aposta e deduzir o saldo. Tente novamente.');
     } finally {
       setLoading(false);
