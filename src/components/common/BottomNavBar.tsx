@@ -1,11 +1,11 @@
-// src/components/common/BottomNavBar.tsx
+
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
 interface BottomNavBarProps {
-  onMenuOpen: () => void; // <-- ESSENCIAL: A prop que abre o menu lateral
+  onMenuOpen: () => void; 
 }
 
 export function BottomNavBar({ onMenuOpen }: BottomNavBarProps) { 
@@ -13,10 +13,10 @@ export function BottomNavBar({ onMenuOpen }: BottomNavBarProps) {
 
   const navItems = [
     { name: 'Suporte', type: 'image', src: '/SuportIcon.svg', href: '/suporte' },
-    { name: 'Carteira', type: 'image', src: '/CarteiraIcon.svg', href: '/carteira' },
+    { name: 'Carteira', type: 'image', src: '/CarteiraIcon.svg', href: '/perfil' },
     { name: 'Apostar', type: 'image', src: '/dolar.svg', href: '/jbmodalidade' },
-    { name: 'Resultados', type: 'image', src: '/ResultadosIcon.svg', href: '/jbresultados' }, // Ajustei para /jbresultados
-    { name: 'Menu', type: 'image', src: '/MenuIcon.svg', href: '#', isSpecialButton: true }, // href="#" para botão especial
+    { name: 'Resultados', type: 'image', src: '/ResultadosIcon.svg', href: '/jbresultados' }, 
+    { name: 'Menu', type: 'image', src: '/MenuIcon.svg', href: '#', isSpecialButton: true }, 
   ];
 
   return (
@@ -24,16 +24,16 @@ export function BottomNavBar({ onMenuOpen }: BottomNavBarProps) {
       {navItems.map((item) => (
         <React.Fragment key={item.name}>
           {item.isSpecialButton ? (
-            // Se for o botão 'Menu', usa um botão normal com onClick
+           
             <button
-              onClick={onMenuOpen} // Chama a função passada via prop
+              onClick={onMenuOpen} 
               className={`flex flex-col items-center text-xs ${pathname === item.href ? 'text-yellow-300' : ''}`}
             >
               <img src={item.src} alt={item.name} className="w-6 h-6" />
               <span>{item.name}</span>
             </button>
           ) : (
-            // Para os outros itens, mantém o Link normal
+            
             <Link href={item.href} className={`flex flex-col items-center text-xs ${pathname === item.href ? 'text-yellow-300' : ''}`}>
               <img src={item.src} alt={item.name} className="w-6 h-6" />
               <span>{item.name}</span>

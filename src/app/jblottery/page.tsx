@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, Suspense } from 'react'; // Adicionado Suspense aqui
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
 
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-// Componente que contém toda a lógica e UI que usa useSearchParams
+
 function SelectLotteryContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -61,7 +61,7 @@ function SelectLotteryContent() {
       lotteryName: encodeURIComponent(selectedLotteryName),
     }).toString();
 
-    // Observe que a rota está indo para /jbgame-details, então os parâmetros serão passados corretamente para lá.
+   
     router.push(`/jbgame-details?${queryParams}`); 
   };
 
@@ -144,7 +144,7 @@ function SelectLotteryContent() {
   );
 }
 
-// Este é o componente que será exportado como a página, envolvendo o conteúdo com Suspense
+
 export default function SelectLotteryPage() {
   return (
     <Suspense fallback={<div>Carregando loterias...</div>}>

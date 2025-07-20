@@ -1,25 +1,21 @@
-// src/app/home/page.tsx
-"use client"; // Manter "use client"
+
+"use client";
 
 import React, { useState, useEffect } from 'react';
-// REMOVA ESTAS LINHAS (elas vão para o layout.tsx):
-// import { Header } from '../../components/common/Header';
-// import { BottomNavBar } from '../../components/common/BottomNavBar';
-// import { SideMenu } from '../../components/common/SideMenu';
 
-import { HeroSlider } from '../../components/home/HeroSlider'; // Ajustar caminho se necessário
-import { GameCard } from '../../components/home/GameCard'; // Ajustar caminho se necessário
-import { ResultCard } from '../../components/home/ResultCard'; // Ajustar caminho se necessário
-import { WinnerCard } from '../../components/home/WinnerCard'; // Ajustar caminho se necessário
+import { HeroSlider } from '../../components/home/HeroSlider'; 
+import { GameCard } from '../../components/home/GameCard'; 
+import { ResultCard } from '../../components/home/ResultCard'; 
+import { WinnerCard } from '../../components/home/WinnerCard'; 
 import Link from 'next/link';
 
-// Helper para gerar um nome aleatório (apenas para simulação)
+
 const getRandomName = () => {
     const names = ['Ana C.', 'Pedro H.', 'Maria L.', 'Carlos M.', 'Sofia G.', 'Bruno F.'];
     return names[Math.floor(Math.random() * names.length)];
 };
 
-// Nova definição: Horários das loterias para coerência
+
 const lotteryTimes = [
   { label: 'Look 10h20', hour: 10, minute: 20 },
   { label: 'Rio 11h00', hour: 11, minute: 0 },
@@ -44,7 +40,7 @@ interface WinnerDataType {
 }
 
 export default function HomePage() {
-  // Seus dados de resultados (mantidos como antes)
+
   const results = [
     { id: 1, type: 'Federal 19H', date: 'Sábado, 21 de Junho de 2025', lotteryId: 'federal-19h', fullDate: '2025-06-21' },
     { id: 2, type: 'Loteria Nacional 23HS', date: 'Sexta, 20 de Junho de 2025', lotteryId: 'loteria-nacional-23hs', fullDate: '2025-06-20' },
@@ -108,9 +104,8 @@ export default function HomePage() {
   }, []);
 
   return (
-    // Removi o div externo que continha Header e BottomNavBar,
-    // pois eles agora estão no layout.tsx
-    <div className="p-9 space-y-6"> {/* Este div será o 'children' dentro do layout */}
+    
+    <div className="p-9 space-y-6"> 
       <HeroSlider />
 
       <section className="text-center mt-6">
@@ -130,7 +125,7 @@ export default function HomePage() {
               key={result.id}
               type={result.type}
               date={result.date}
-              // ADICIONE ESTAS DUAS PROPRIEDADES QUE ESTAVAM FALTANDO:
+              
               lotteryId={result.lotteryId}
               fullDate={result.fullDate}
             />

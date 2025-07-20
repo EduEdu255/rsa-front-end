@@ -1,14 +1,18 @@
+
 "use client";
 
-import React, { Suspense } from 'react'; 
+import React, { Suspense, useState, useEffect } from 'react'; 
 import { useRouter, useSearchParams } from 'next/navigation';
-
-
 
 
 function ConfirmacaoContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   const modalidade = searchParams.get('modalidade') || 'N/A';
   const animalIds = searchParams.get('animalIds') || '';
@@ -20,8 +24,8 @@ function ConfirmacaoContent() {
   const decodedModalidade = decodeURIComponent(modalidade);
   const decodedAnimalNames = decodeURIComponent(animalNames).split(',').filter(name => name.trim() !== '');
   const decodedAnimalIds = animalIds.split(',').map(Number).filter(id => !isNaN(id));
-  const decodedPosition = decodeURIComponent(position); 
-  const decodedBetAmount = decodeURIComponent(betAmount); 
+  const decodedPosition = decodeURIComponent(position);
+  const decodedBetAmount = decodeURIComponent(betAmount);
   const puleNumber = "H2bicho";
   const validityDate = "25/06/2025";
   const vendorId = "606610";
@@ -29,9 +33,29 @@ function ConfirmacaoContent() {
 
   const loteriaSelecionada = "LT NACIONAL 23HS";
 
-  const totalBetValue = parseFloat(decodedBetAmount.replace(',', '.'));
+  const totalBetValue = parseFloat(decodedBetAmount.replace(',', '.')); 
 
-  const handleFinalizarAposta = () => {
+  
+  const handleFinalizarAposta = async () => {
+    setError(null);
+    setSuccess(null);
+    setLoading(true);
+
+    if (typeof window === 'undefined') {
+      setError('Ambiente não suportado para esta operação.');
+      setLoading(false);
+      return;
+    }
+
+    const currentBalanceString = localStorage.getItem('userBalance') || '0,00';
+    const currentBalance = parseFloat(currentBalanceString.replace(',', '.'));
+
+    if (totalBetValue > currentBalance) {
+      setError(`Saldo insuficiente para esta aposta. Seu saldo atual é R$ ${currentBalanceString}.`);
+      setLoading(false);
+      return;
+    }
+
     console.log("Aposta a ser finalizada:", {
       puleNumber,
       validityDate,
@@ -47,14 +71,32 @@ function ConfirmacaoContent() {
       totalCalculado: totalBetValue
     });
 
-    alert("Aposta finalizada! (Ainda não integrado com o Back-end)");
-    router.push('/home');
+    await new Promise(resolve => setTimeout(resolve, 1500)); 
+
+    try {
+     
+      const newBalance = currentBalance - totalBetValue;
+      localStorage.setItem('userBalance', newBalance.toFixed(2).replace('.', ',')); 
+
+
+      const event = new CustomEvent('balanceUpdate', { detail: { newBalance: newBalance.toFixed(2).replace('.', ',') } });
+      window.dispatchEvent(event);
+
+      setSuccess(`Aposta finalizada com sucesso! Valor de R$ ${decodedBetAmount} debitado. Novo saldo: R$ ${newBalance.toFixed(2).replace('.', ',')}.`);
+
+      setTimeout(() => {
+        router.push('/home'); 
+      }, 3000);
+
+    } catch (err) {
+      setError('Ocorreu um erro ao finalizar a aposta e deduzir o saldo. Tente novamente.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      
-
       <main className="flex-grow relative overflow-hidden">
         <div className="absolute inset-0 striped-background"></div>
 
@@ -114,20 +156,37 @@ function ConfirmacaoContent() {
             </div>
           </div>
 
-          <button
-            onClick={handleFinalizarAposta}
-            className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg mt-6"
-          >
-            Finalizar
-          </button>
+          
+          {loading && <p className="text-primary text-lg mt-4 text-center">Finalizando aposta...</p>}
+          {error && <p className="text-red-500 text-sm mt-4 text-center">{error}</p>}
+          {success && <p className="text-green-500 text-sm mt-4 text-center">{success}</p>}
+
+          
+          {!success && (
+            <button
+              onClick={handleFinalizarAposta}
+              disabled={loading} 
+              className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg mt-6"
+            >
+              {loading ? 'Processando...' : 'Finalizar'}
+            </button>
+          )}
+
+         
+          {success && (
+            <button
+              onClick={() => router.push('/home')}
+              className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg mt-6"
+            >
+              Voltar ao Início
+            </button>
+          )}
+
         </div>
       </main>
-
-      
     </>
   );
 }
-
 
 export default function ConfirmacaoPage() {
   return (

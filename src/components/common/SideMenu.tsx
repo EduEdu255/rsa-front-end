@@ -1,16 +1,16 @@
-// src/components/common/SideMenu.tsx
+
 import React from 'react';
 import Link from 'next/link';
 
 interface SideMenuProps {
   isOpen: boolean;
-  onClose: () => void; // Função para fechar o menu
+  onClose: () => void; 
 }
 
 export function SideMenu({ isOpen, onClose }: SideMenuProps) {
   return (
     <>
-      {/* Overlay (fundo escuro) */}
+ 
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40" 
@@ -18,7 +18,7 @@ export function SideMenu({ isOpen, onClose }: SideMenuProps) {
         ></div>
       )}
 
-      {/* Menu Lateral */}
+   
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}`} 
@@ -40,12 +40,12 @@ export function SideMenu({ isOpen, onClose }: SideMenuProps) {
                 Início
               </div>
             </Link>
-            <Link href="/carteira" passHref>
+            <Link href="/perfil" passHref>
               <div onClick={onClose} className="block text-lg text-black hover:text-primary transition-colors duration-200 cursor-pointer">
                 Minha Carteira
               </div>
             </Link>
-            <Link href="/jbresultados" passHref> {/* Ajustei para /jbresultados */}
+            <Link href="/jbresultados" passHref> 
               <div onClick={onClose} className="block text-lg text-black hover:text-primary transition-colors duration-200 cursor-pointer">
                 Resultados JB
               </div>
@@ -55,7 +55,7 @@ export function SideMenu({ isOpen, onClose }: SideMenuProps) {
                 Login / Cadastro
               </div>
             </Link>
-            {/* Adicione mais links aqui conforme necessário */}
+   
           </nav>
         </div>
       </div>

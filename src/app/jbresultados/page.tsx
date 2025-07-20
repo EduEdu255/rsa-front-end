@@ -56,7 +56,7 @@ function ResultadosContent() {
                 }
             }
         },
-        // CORREÇÃO AQUI: 'look-goias-14h' com 'h' minúsculo para consistência
+       
         'look-goias-14h': {
             '2025-06-20': {
                 type: 'Look Goias 14H',
@@ -137,7 +137,7 @@ function ResultadosContent() {
     );
 }
 
-// Componente da página que envolve o conteúdo com Suspense
+
 export default function JbResultadosPage() {
     return (
         <Suspense fallback={<div>Carregando detalhes do resultado...</div>}>
