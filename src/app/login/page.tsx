@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 
 
 interface SignInPayload {
@@ -25,7 +25,7 @@ async function signInUserMock(credentials: SignInPayload): Promise<SignInRespons
   return new Promise((resolve, reject) => {
     setTimeout(() => {
     
-      const validLoginCpf = '123.456.789-00'; 
+      const validLoginCpf = '123.456.789-00';
       const validPassword = 'senha123';
 
       if (
@@ -35,7 +35,7 @@ async function signInUserMock(credentials: SignInPayload): Promise<SignInRespons
         const mockResponse: SignInResponse = {
           token: 'mock_jwt_token_' + Math.random().toString(36).substr(2, 9),
           userId: 'mock-user-id-' + Math.random().toString(36).substr(2, 9),
-          username: 'Usuário Mock', 
+          username: 'Usuário Mock',
           tenantId: credentials.tenantId,
         };
         console.log('Mock: Login bem-sucedido!', mockResponse);
@@ -47,13 +47,13 @@ async function signInUserMock(credentials: SignInPayload): Promise<SignInRespons
         console.error('Mock: Credenciais inválidas.');
         reject(new Error('Credenciais inválidas. Verifique seu login e senha.'));
       }
-    }, 1500); 
+    }, 1500);
   });
 }
 
 
-export default function LoginPage() { 
-  const [login, setLogin] = useState<string>(''); 
+export default function LoginPage() {
+  const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
@@ -99,18 +99,20 @@ export default function LoginPage() {
 
       setMessage('Login bem-sucedido! Redirecionando...');
       
-      
-      if (typeof window !== 'undefined') { 
+      if (typeof window !== 'undefined') {
         localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userName', result.username); 
-        localStorage.setItem('authToken', result.token); 
+        localStorage.setItem('userName', result.username);
+        localStorage.setItem('authToken', result.token);
       }
-
 
       router.push('/home');
 
-    } catch (error: any) {
-      setMessage(`Erro no login: ${error.message || 'Verifique o console para mais detalhes.'}`);
+    } catch (error: unknown) { 
+      let errorMessage = 'Verifique o console para mais detalhes.';
+      if (error instanceof Error) { 
+        errorMessage = error.message;
+      }
+      setMessage(`Erro no login: ${errorMessage}`);
       setIsError(true);
     } finally {
       setLoading(false);

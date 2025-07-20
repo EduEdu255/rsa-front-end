@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+
 
 export default function TrocarSenhaPage() {
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function TrocarSenhaPage() {
       return;
     }
 
-    if (newPassword.length < 6) { 
+    if (newPassword.length < 6) {
       setError('A nova senha deve ter no mínimo 6 caracteres.');
       setLoading(false);
       return;
@@ -43,20 +43,16 @@ export default function TrocarSenhaPage() {
       return;
     }
 
-
-    await new Promise(resolve => setTimeout(resolve, 2000)); 
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     try {
-      
       setSuccess('Senha alterada com sucesso! Você será redirecionado.');
       
-      
       setTimeout(() => {
-        router.push('/perfil'); 
+        router.push('/perfil');
       }, 1500);
 
-    } catch (err) {
-      
+    } catch (_err) { 
       setError('Falha ao trocar a senha. Tente novamente. (Mock de erro)');
     } finally {
       setLoading(false);
@@ -65,7 +61,6 @@ export default function TrocarSenhaPage() {
 
   return (
     <div className="min-h-screen primary-bg-container text-black flex flex-col items-center p-4">
-   
       <div className="text-primary flex items-center justify-center gap-4 mb-6">
         <button onClick={() => router.back()} className="text-secondary text-3xl font-bold p-1 rounded-full hover:bg-gray-200 transition-colors duration-200">
           ←
@@ -78,7 +73,6 @@ export default function TrocarSenhaPage() {
           <>
             <h2 className="text-text-dark text-xl font-semibold mb-4">Atualize sua senha</h2>
 
-            
             <div className='w-full'>
               <label htmlFor="currentPassword" className="block text-text-dark text-sm font-bold mb-2">
                 Senha Atual:
@@ -93,7 +87,6 @@ export default function TrocarSenhaPage() {
               />
             </div>
 
-          
             <div className='w-full'>
               <label htmlFor="newPassword" className="block text-text-dark text-sm font-bold mb-2">
                 Nova Senha:
@@ -108,7 +101,6 @@ export default function TrocarSenhaPage() {
               />
             </div>
 
-            
             <div className='w-full'>
               <label htmlFor="confirmNewPassword" className="block text-text-dark text-sm font-bold mb-2">
                 Confirmar Nova Senha:
@@ -137,7 +129,6 @@ export default function TrocarSenhaPage() {
         {loading && (
           <div className="flex flex-col items-center justify-center h-40">
             <p className="text-primary text-lg">Carregando...</p>
-            
           </div>
         )}
 
@@ -150,7 +141,7 @@ export default function TrocarSenhaPage() {
                 setCurrentPassword('');
                 setNewPassword('');
                 setConfirmNewPassword('');
-                router.push('/perfil'); 
+                router.push('/perfil');
               }}
               className="text-primary text-sm mt-4 hover:underline"
             >

@@ -8,29 +8,22 @@ interface CreateTenantPayload {
   domain: string;
 }
 
-
-
 async function createNewTenant(tenantData: CreateTenantPayload) {
-
   return new Promise((resolve) => {
-
     setTimeout(() => {
-
       const mockResponse = {
-        id: 'mock-tenant-id-' + Math.random().toString(36).substr(2, 9), 
+        id: 'mock-tenant-id-' + Math.random().toString(36).substr(2, 9),
         name: tenantData.name,
         domain: tenantData.domain,
         status: true,
         createdAt: new Date().toISOString(),
       };
       console.log('Mock: Tenant criado com sucesso!', mockResponse);
-      resolve(mockResponse); 
-    }, 1000); 
+      resolve(mockResponse);
+    }, 1000);
   });
 
-
-
-  // --- CÓDIGO REAL DA API  ---
+  // --- CÓDIGO REAL DA API (COMENTADO) ---
   /*
   try {
     const response = await fetch(`${API_BASE_URL}/tenants/create`, {
@@ -55,7 +48,7 @@ async function createNewTenant(tenantData: CreateTenantPayload) {
     console.log('Tenant criado com sucesso (resposta 200 OK da API)!');
     return { message: 'Tenant criado com sucesso!' };
 
-  } catch (error: any) {
+  } catch (error: any) { // Este 'any' seria corrigido se o código real estivesse ativo
     console.error('Falha ao criar tenant:', error.message);
     throw error;
   }
@@ -77,13 +70,16 @@ export default function CreateTenantPage() {
     setLoading(true);
 
     try {
-      
-      await createNewTenant({ name, domain }); 
-      setMessage('Tenant criado com sucesso (MOCK)!'); 
+      await createNewTenant({ name, domain });
+      setMessage('Tenant criado com sucesso (MOCK)!');
       setName('');
       setDomain('');
-    } catch (error: any) {
-      setMessage(`Erro ao criar tenant (MOCK): ${error.message || 'Verifique o console para mais detalhes.'}`);
+    } catch (error: unknown) { 
+      let errorMessage = 'Verifique o console para mais detalhes.';
+      if (error instanceof Error) { 
+        errorMessage = error.message;
+      }
+      setMessage(`Erro ao criar tenant (MOCK): ${errorMessage}`);
       setIsError(true);
     } finally {
       setLoading(false);
@@ -132,7 +128,7 @@ export default function CreateTenantPage() {
             }`}
             disabled={loading}
           >
-            {loading ? 'Criando...' : 'Criar Tenant (MOCK)'} 
+            {loading ? 'Criando...' : 'Criar Tenant (MOCK)'}
           </button>
         </form>
 
