@@ -56,7 +56,7 @@ function ResultadosContent() {
                 }
             }
         },
-       
+
         'look-goias-14h': {
             '2025-06-20': {
                 type: 'Look Goias 14H',
@@ -78,7 +78,7 @@ function ResultadosContent() {
                 }
             }
         },
-       
+
     };
 
     const currentResult = lotteryType && resultDate
@@ -132,7 +132,7 @@ function ResultadosContent() {
                 </div>
             </main>
 
-            
+
         </div>
     );
 }

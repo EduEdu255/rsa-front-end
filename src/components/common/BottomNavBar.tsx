@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import Image from 'next/image'; 
+import Image from 'next/image';
 
 interface BottomNavBarProps {
   onMenuOpen: () => void;
@@ -28,13 +28,13 @@ export function BottomNavBar({ onMenuOpen }: BottomNavBarProps) {
               onClick={onMenuOpen}
               className={`flex flex-col items-center text-xs ${pathname === item.href ? 'text-yellow-300' : ''}`}
             >
-              
+
               <Image src={item.src} alt={item.name} width={24} height={24} className="w-6 h-6" />
               <span>{item.name}</span>
             </button>
           ) : (
             <Link href={item.href} className={`flex flex-col items-center text-xs ${pathname === item.href ? 'text-yellow-300' : ''}`}>
-              
+
               <Image src={item.src} alt={item.name} width={24} height={24} className="w-6 h-6" />
               <span>{item.name}</span>
             </Link>

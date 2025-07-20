@@ -41,7 +41,7 @@ export default function JogoDoBichoPage() {
   return (
     <div className="flex flex-col min-h-screen secondary-bg-container text-foreground">
 
-      
+
 
       <main className="flex-grow relative overflow-hidden">
 
@@ -78,7 +78,7 @@ export default function JogoDoBichoPage() {
         </div>
       </main>
 
-      
+
     </div>
   );
 }

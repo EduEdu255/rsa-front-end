@@ -3,16 +3,16 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { HeroSlider } from '../../components/home/HeroSlider'; 
-import { GameCard } from '../../components/home/GameCard'; 
-import { ResultCard } from '../../components/home/ResultCard'; 
-import { WinnerCard } from '../../components/home/WinnerCard'; 
+import { HeroSlider } from '../../components/home/HeroSlider';
+import { GameCard } from '../../components/home/GameCard';
+import { ResultCard } from '../../components/home/ResultCard';
+import { WinnerCard } from '../../components/home/WinnerCard';
 import Link from 'next/link';
 
 
 const getRandomName = () => {
-    const names = ['Ana C.', 'Pedro H.', 'Maria L.', 'Carlos M.', 'Sofia G.', 'Bruno F.'];
-    return names[Math.floor(Math.random() * names.length)];
+  const names = ['Ana C.', 'Pedro H.', 'Maria L.', 'Carlos M.', 'Sofia G.', 'Bruno F.'];
+  return names[Math.floor(Math.random() * names.length)];
 };
 
 
@@ -104,8 +104,8 @@ export default function HomePage() {
   }, []);
 
   return (
-    
-    <div className="p-9 space-y-6"> 
+
+    <div className="p-9 space-y-6">
       <HeroSlider />
 
       <section className="text-center mt-6">
@@ -125,7 +125,7 @@ export default function HomePage() {
               key={result.id}
               type={result.type}
               date={result.date}
-              
+
               lotteryId={result.lotteryId}
               fullDate={result.fullDate}
             />
@@ -137,11 +137,11 @@ export default function HomePage() {
         <h2 className="text-[35px] font-bold text-purple-900 mb-4">Ganhadores do Dia</h2>
         <div className="space-y-3">
           {currentWinners.length > 0 ? (
-              currentWinners.map((winner) => (
-                <WinnerCard key={winner.id} {...winner} />
-              ))
+            currentWinners.map((winner) => (
+              <WinnerCard key={winner.id} {...winner} />
+            ))
           ) : (
-              <p className="text-black">Carregando ganhadores...</p>
+            <p className="text-black">Carregando ganhadores...</p>
           )}
         </div>
       </section>

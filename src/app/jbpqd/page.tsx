@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, Suspense } from 'react'; 
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
 
 
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -33,7 +33,7 @@ function SelectLotteryContent() {
     if (cleanValue.length < 2) {
       cleanValue = cleanValue.padStart(2, '0');
     }
-    
+
     const formatted = (parseInt(cleanValue, 10) / 100).toFixed(2).replace('.', ',');
     return formatted;
   };
@@ -70,17 +70,17 @@ function SelectLotteryContent() {
       position: encodeURIComponent(selectedPosition),
       betAmount: encodeURIComponent(betAmount),
       betType: encodeURIComponent(selectedType),
-      
+
       lotteryId: searchParams.get('lotteryId') || '',
       lotteryName: searchParams.get('lotteryName') || '',
     }).toString();
-    
+
     router.push(`/jbgame-details?${queryParams}`);
   };
 
   return (
     <div className="text-primary flex flex-col min-h-screen bg-background text-black">
- 
+
 
       <main className="text-primary flex-grow relative overflow-hidden">
         <div className="text-primary absolute inset-0 striped-background"></div>
@@ -219,7 +219,7 @@ function SelectLotteryContent() {
         </div>
       </main>
 
-      
+
     </div>
   );
 }

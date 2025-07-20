@@ -74,9 +74,9 @@ export default function CreateTenantPage() {
       setMessage('Tenant criado com sucesso (MOCK)!');
       setName('');
       setDomain('');
-    } catch (error: unknown) { 
+    } catch (error: unknown) {
       let errorMessage = 'Verifique o console para mais detalhes.';
-      if (error instanceof Error) { 
+      if (error instanceof Error) {
         errorMessage = error.message;
       }
       setMessage(`Erro ao criar tenant (MOCK): ${errorMessage}`);
@@ -90,7 +90,7 @@ export default function CreateTenantPage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center text-purple-800">Criar Novo Tenant</h1>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
@@ -123,9 +123,8 @@ export default function CreateTenantPage() {
 
           <button
             type="submit"
-            className={`w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
-              loading ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+            className={`w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${loading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
             disabled={loading}
           >
             {loading ? 'Criando...' : 'Criar Tenant (MOCK)'}

@@ -1,6 +1,6 @@
-"use client"; 
+"use client";
 
-import React, { useState, Suspense } from 'react'; 
+import React, { useState, Suspense } from 'react';
 
 
 import { AnimalCard } from '../../components/animais/AnimalCard';
@@ -58,7 +58,7 @@ function AnimalGridContent() {
       alert('Por favor, selecione pelo menos um animal para continuar.');
       return;
     }
-    
+
     const selectedAnimalNames = selectedAnimalIds.map(id => {
       const animal = animalData.find(a => a.id === id);
       return animal ? animal.name : '';
@@ -67,7 +67,7 @@ function AnimalGridContent() {
     const encodedModalidade = encodeURIComponent(modalidade || '');
     const encodedSelectedAnimalIds = encodeURIComponent(selectedAnimalIds.join(','));
     const encodedSelectedAnimalNames = encodeURIComponent(selectedAnimalNames);
-    
+
     router.push(
       `/jbpqd?modalidade=${encodedModalidade}&animalIds=${encodedSelectedAnimalIds}&animalNames=${encodedSelectedAnimalNames}`
     );
@@ -75,7 +75,7 @@ function AnimalGridContent() {
 
   return (
     <>
-      
+
 
       <main className="flex-grow relative overflow-hidden">
         <div className="absolute inset-0 striped-background"></div>
@@ -97,14 +97,14 @@ function AnimalGridContent() {
               Modalidade: <span className="text-black">{decodeURIComponent(modalidade || 'N/A')}</span>
             </p>
             <p className="text-black text-sm md:text-base">Escolha os Animais.</p>
-            
+
             {selectedAnimalIds.length > 0 && (
-                <p className="text-black text-sm mt-2">
-                    Selecionados: {selectedAnimalIds.map(id => {
-                        const animal = animalData.find(a => a.id === id);
-                        return animal ? decodeURIComponent(animal.name) : '';
-                    }).join(', ')}
-                </p>
+              <p className="text-black text-sm mt-2">
+                Selecionados: {selectedAnimalIds.map(id => {
+                  const animal = animalData.find(a => a.id === id);
+                  return animal ? decodeURIComponent(animal.name) : '';
+                }).join(', ')}
+              </p>
             )}
           </div>
 
@@ -116,11 +116,11 @@ function AnimalGridContent() {
                 imageSrc={animal.imageSrc}
                 numbers={animal.numbers}
                 onClick={() => handleAnimalCardClick(animal.id, animal.name)}
-                isSelected={selectedAnimalIds.includes(animal.id)} 
+                isSelected={selectedAnimalIds.includes(animal.id)}
               />
             ))}
           </div>
-          
+
           <button
             onClick={handleProceedToLottery}
             className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg mt-6"
@@ -131,7 +131,7 @@ function AnimalGridContent() {
         </div>
       </main>
 
-      
+
     </>
   );
 }

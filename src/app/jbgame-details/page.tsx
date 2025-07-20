@@ -1,7 +1,7 @@
-
+// src/app/jbgame-details/page.tsx
 "use client";
 
-import React, { Suspense, useState, useEffect } from 'react'; 
+import React, { Suspense, useState /* Removido useEffect pois não é usado diretamente aqui */ } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 
@@ -9,7 +9,6 @@ function ConfirmacaoContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -33,9 +32,8 @@ function ConfirmacaoContent() {
 
   const loteriaSelecionada = "LT NACIONAL 23HS";
 
-  const totalBetValue = parseFloat(decodedBetAmount.replace(',', '.')); 
+  const totalBetValue = parseFloat(decodedBetAmount.replace(',', '.'));
 
-  
   const handleFinalizarAposta = async () => {
     setError(null);
     setSuccess(null);
@@ -71,13 +69,11 @@ function ConfirmacaoContent() {
       totalCalculado: totalBetValue
     });
 
-    await new Promise(resolve => setTimeout(resolve, 1500)); 
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
     try {
-     
       const newBalance = currentBalance - totalBetValue;
-      localStorage.setItem('userBalance', newBalance.toFixed(2).replace('.', ',')); 
-
+      localStorage.setItem('userBalance', newBalance.toFixed(2).replace('.', ','));
 
       const event = new CustomEvent('balanceUpdate', { detail: { newBalance: newBalance.toFixed(2).replace('.', ',') } });
       window.dispatchEvent(event);
@@ -85,10 +81,10 @@ function ConfirmacaoContent() {
       setSuccess(`Aposta finalizada com sucesso! Valor de R$ ${decodedBetAmount} debitado. Novo saldo: R$ ${newBalance.toFixed(2).replace('.', ',')}.`);
 
       setTimeout(() => {
-        router.push('/home'); 
+        router.push('/home');
       }, 3000);
 
-    } catch (err) {
+    } catch (_err) {
       setError('Ocorreu um erro ao finalizar a aposta e deduzir o saldo. Tente novamente.');
     } finally {
       setLoading(false);
@@ -156,23 +152,20 @@ function ConfirmacaoContent() {
             </div>
           </div>
 
-          
           {loading && <p className="text-primary text-lg mt-4 text-center">Finalizando aposta...</p>}
           {error && <p className="text-red-500 text-sm mt-4 text-center">{error}</p>}
           {success && <p className="text-green-500 text-sm mt-4 text-center">{success}</p>}
 
-          
           {!success && (
             <button
               onClick={handleFinalizarAposta}
-              disabled={loading} 
+              disabled={loading}
               className="w-full button-bg-withe text-background font-bold py-4 rounded-lg text-xl hover:opacity-90 transition-opacity duration-200 shadow-lg mt-6"
             >
               {loading ? 'Processando...' : 'Finalizar'}
             </button>
           )}
 
-         
           {success && (
             <button
               onClick={() => router.push('/home')}
@@ -187,6 +180,7 @@ function ConfirmacaoContent() {
     </>
   );
 }
+
 
 export default function ConfirmacaoPage() {
   return (

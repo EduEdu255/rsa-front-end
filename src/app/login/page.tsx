@@ -24,7 +24,7 @@ interface SignInResponse {
 async function signInUserMock(credentials: SignInPayload): Promise<SignInResponse> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-    
+
       const validLoginCpf = '123.456.789-00';
       const validPassword = 'senha123';
 
@@ -98,7 +98,7 @@ export default function LoginPage() {
       });
 
       setMessage('Login bem-sucedido! Redirecionando...');
-      
+
       if (typeof window !== 'undefined') {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userName', result.username);
@@ -107,9 +107,9 @@ export default function LoginPage() {
 
       router.push('/home');
 
-    } catch (error: unknown) { 
+    } catch (error: unknown) {
       let errorMessage = 'Verifique o console para mais detalhes.';
-      if (error instanceof Error) { 
+      if (error instanceof Error) {
         errorMessage = error.message;
       }
       setMessage(`Erro no login: ${errorMessage}`);
@@ -157,15 +157,14 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className={`w-full button-bg-withe text-text-light font-bold py-3 rounded-lg hover:bg-secondary transition-colors duration-300 ${
-              loading ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+            className={`w-full button-bg-withe text-text-light font-bold py-3 rounded-lg hover:bg-secondary transition-colors duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
             disabled={loading}
           >
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
-        
+
         <Link href="/register" passHref className="w-full">
           <button className="w-full border-input text-text-light font-bold py-3 rounded-lg hover:bg-primary transition-colors duration-300">
             Criar conta

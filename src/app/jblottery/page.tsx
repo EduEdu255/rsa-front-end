@@ -25,7 +25,7 @@ function SelectLotteryContent() {
     console.log('Modalidade:', modalidade);
     console.log('IDs de animais selecionados:', selectedAnimalIds);
     console.log('Nomes de animais selecionados:', selectedAnimalNames);
-  }, [modalidade, selectedAnimalIds, selectedAnimalNames]); 
+  }, [modalidade, selectedAnimalIds, selectedAnimalNames]);
 
   const loterias = {
     Nacional: [
@@ -61,13 +61,13 @@ function SelectLotteryContent() {
       lotteryName: encodeURIComponent(selectedLotteryName),
     }).toString();
 
-   
-    router.push(`/jbgame-details?${queryParams}`); 
+
+    router.push(`/jbgame-details?${queryParams}`);
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-primary">
-      
+
 
       <main className="flex-grow relative overflow-hidden">
         <div className="absolute inset-0 striped-background"></div>
@@ -139,7 +139,7 @@ function SelectLotteryContent() {
         </div>
       </main>
 
-      
+
     </div>
   );
 }

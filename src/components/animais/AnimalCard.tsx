@@ -4,9 +4,9 @@ import Image from 'next/image';
 interface AnimalCardProps {
   id: number;
   imageSrc: string;
-  numbers: string; 
+  numbers: string;
   onClick?: () => void;
-  isSelected?: boolean; 
+  isSelected?: boolean;
 }
 
 export const AnimalCard: React.FC<AnimalCardProps> = ({ id, imageSrc, numbers, onClick, isSelected = false }) => {
@@ -19,14 +19,14 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ id, imageSrc, numbers, o
       `}
       onClick={onClick}
     >
-      
+
       {isSelected && (
         <div className="absolute -top-1 -left-2 z-20 w-8 h-8 md:w-10 md:h-10 button-bg-dark rounded-4xl flex items-center justify-center text-primary font-bold text-lg md:text-xl shadow-lg border-2 border-white">
           {id}
         </div>
       )}
 
-      
+
       <div className="w-full h-32 md:h-40 relative">
         <Image
           src={imageSrc}
@@ -39,15 +39,15 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ id, imageSrc, numbers, o
         />
       </div>
 
-      
-      {!isSelected && ( 
+
+      {!isSelected && (
         <div className="absolute top-2 left-2 w-8 h-8 md:w-10 md:h-10 button-bg-withe rounded-full flex items-center justify-center text-background font-bold text-lg md:text-xl shadow">
           {id}
         </div>
       )}
 
 
-      
+
       <div className="p-2 md:p-3 button-bg-withe text-center">
         <p className="text-white text-sm md:text-base font-semibold whitespace-nowrap overflow-hidden text-ellipsis">{numbers}</p>
       </div>
